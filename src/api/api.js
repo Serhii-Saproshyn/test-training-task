@@ -1,9 +1,23 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://646a7db97d3c1cae4ce29c5f.mockapi.io/users/";
+const BASE_URL = "https://646a7db97d3c1cae4ce29c5f.mockapi.io/users/";
 
-const fetchUsers = async () => {
-  return await axios.get().catch((error) => console.log(error.message));
+export const fetchUsers = async (page, limit = 6) => {
+  return await axios.get(BASE_URL, {
+    params: {
+      page,
+      limit,
+    },
+  });
 };
 
-export default fetchUsers;
+export const putFollowers = async (id, followers) => {
+  try {
+    const response = await axios.put(`${BASE_URL}${id}`, {
+      followers: followers,
+    });
+    console.log("Профиль успешно обновлен:", response.data);
+  } catch (error) {
+    console.error("Ошибка при обновлении профиля:", error.message);
+  }
+};

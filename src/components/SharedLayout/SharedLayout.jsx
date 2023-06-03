@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Suspense } from "react";
 import Loader from "components/Loader/Loader.jsx";
+import gitHub from "images/gitHub.svg";
 import css from "components/SharedLayout/SharedLayout.module.css";
 
 const SharedLayout = () => {
@@ -9,12 +10,12 @@ const SharedLayout = () => {
       <header className={css.header}>
         <ul className={css.navList}>
           <li>
-            <NavLink to="/" className={css["nav-link"]}>
+            <NavLink className={css.navlink} to="/">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/tweets" className={css["nav-link"]}>
+            <NavLink className={css.navlink} to="/tweets">
               Tweets
             </NavLink>
           </li>
@@ -26,8 +27,17 @@ const SharedLayout = () => {
         </Suspense>
       </main>
       <footer>
-        This project was created during the training. You can view the source
-        files of this and my other projects by clicking on this logo:
+        <p>
+          This project was created during the training. You can view the source
+          files of this and my other projects by clicking on this logo:
+        </p>
+        <a
+          href="https://github.com/Serhii-Saproshyn"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={gitHub} alt="github" />
+        </a>
       </footer>
     </div>
   );

@@ -1,12 +1,9 @@
-/* .mainContainer {
-  min-height: 100vh;
-} */
-
 header {
-  background-color: rgb(0, 162, 255);
   height: 50px;
   display: flex;
   align-items: center;
+  padding-left: 40px;
+  background-color: rgb(0, 162, 255);
 }
 
 .navList {
@@ -18,8 +15,13 @@ header {
 }
 
 footer {
-  background-color: rgb(0, 162, 255);
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 162, 255);
+}
+
+.navlink:hover {
+  color: #5736a3;
 }
