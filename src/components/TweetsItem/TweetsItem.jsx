@@ -14,18 +14,30 @@ const TweetsItem = ({ id, user, tweets, followers, avatar }) => {
 
   const handleFollowClick = () => {
     setIsFollowing(true);
-    localStorage.setItem(id, JSON.stringify({ isFollowing: true }));
+    localStorage.setItem(
+      id,
+      JSON.stringify({
+        isFollowing: true,
+      })
+    );
     const newFollowers = currentFollowers + 1;
+    const newFollow = true;
     setCurrentFollowers(newFollowers);
-    putFollowers(id, newFollowers);
+    putFollowers(id, newFollowers, newFollow);
   };
 
   const handleUnfollowClick = () => {
     setIsFollowing(false);
-    localStorage.setItem(id, JSON.stringify({ isFollowing: false }));
+    localStorage.setItem(
+      id,
+      JSON.stringify({
+        isFollowing: false,
+      })
+    );
     const newFollowers = currentFollowers - 1;
     setCurrentFollowers(newFollowers);
-    putFollowers(id, newFollowers);
+    const newFollow = false;
+    putFollowers(id, newFollowers, newFollow);
   };
 
   const formattedFollowers = currentFollowers.toLocaleString("en-US");

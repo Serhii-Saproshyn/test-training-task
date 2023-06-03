@@ -11,13 +11,13 @@ export const fetchUsers = async (page, limit = 6) => {
   });
 };
 
-export const putFollowers = async (id, followers) => {
+export const putFollowers = async (id, followers, isFollow) => {
   try {
-    const response = await axios.put(`${BASE_URL}${id}`, {
-      followers: followers,
+    return await axios.put(`${BASE_URL}${id}`, {
+      followers,
+      isFollow,
     });
-    console.log("Профиль успешно обновлен:", response.data);
   } catch (error) {
-    console.error("Ошибка при обновлении профиля:", error.message);
+    console.error("Error:", error.message);
   }
 };

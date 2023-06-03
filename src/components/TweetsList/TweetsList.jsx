@@ -9,6 +9,9 @@ const TweetsList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("All");
+  // const [isFollowed, setIsFollowed] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -30,23 +33,60 @@ const TweetsList = () => {
 
   const handleGoBack = () => navigate("/");
 
+  const onSelect = (e) => {
+    if (e.target.value === "true") {
+      setSelectedValue(true);
+    }
+    if (e.target.value === "false") {
+      setSelectedValue(false);
+    }
+    if (e.target.value === "All") {
+      setSelectedValue("All");
+    }
+  };
+
   return (
     <>
-      <button type="button" className={css.goHomeBtn} onClick={handleGoBack}>
-        <MdKeyboardBackspace width={100} height={100} /> GoHome
-      </button>
+      <div className={css.selectContainer}>
+        <button type="button" className={css.goHomeBtn} onClick={handleGoBack}>
+          <MdKeyboardBackspace width={100} height={100} /> GoHome
+        </button>
+        <select
+          value={selectedValue}
+          onChange={onSelect}
+          className={css.filter}
+        >
+          <option value="All">All</option>
+          <option value={true}>Following</option>
+          <option value={false}>Follow</option>
+        </select>
+      </div>
       {data.length !== 0 && (
         <ul className={css.tweetsList}>
-          {data.map(({ id, user, tweets, followers, avatar }) => (
-            <TweetsItem
-              key={id}
-              id={id}
-              user={user}
-              tweets={tweets}
-              followers={followers}
-              avatar={avatar}
-            />
-          ))}
+          {selectedValue === "All" &&
+            data.map(({ id, user, tweets, followers, avatar }) => (
+              <TweetsItem
+                key={id}
+                id={id}
+                user={user}
+                tweets={tweets}
+                followers={followers}
+                avatar={avatar}
+              />
+            ))}
+          {selectedValue !== "All" &&
+            data
+              .filter(({ isFollow }) => isFollow === selectedValue)
+              .map(({ id, user, tweets, followers, avatar }) => (
+                <TweetsItem
+                  key={id}
+                  id={id}
+                  user={user}
+                  tweets={tweets}
+                  followers={followers}
+                  avatar={avatar}
+                />
+              ))}
         </ul>
       )}
       {loadMore && (
